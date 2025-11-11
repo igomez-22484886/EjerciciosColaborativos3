@@ -3,18 +3,20 @@ add_executable(app
         main.cpp
 )
 
-# Enlazar las librerías creadas en los otros módulos
+# Enlazar librerías
 target_link_libraries(app
         PRIVATE
         music
         video
+        pel_containers
 )
 
-# Incluir los headers de otros módulos para poder usar sus clases
+# Incluir headers de módulos
 target_include_directories(app
         PRIVATE
         ${PROJECT_SOURCE_DIR}/music/include
         ${PROJECT_SOURCE_DIR}/video/include
+        # ${PROJECT_SOURCE_DIR}/common/include
 )
 
 message(STATUS "Ejecutable principal 'app' configurado correctamente.")
