@@ -5,35 +5,57 @@
 #ifndef EJERCICIOSCOLABORATIVOS3_DYNARRAY_H
 #define EJERCICIOSCOLABORATIVOS3_DYNARRAY_H
 
-class DinArray {
+#include <cstddef>
+#include <stdexcept>
+
+// Clase plantilla Dynarray
+
+template<typename T>
+class Dynarray {
 private:
-    Cancion *canciones;
+    T* datos;
     int capacidad;
     int cantidad;
 
     void redimensionar() {
         int nuevaCapacidad = capacidad * 2;
-        Cancion *nuevoArray = new Cancion[nuevaCapacidad];
+        T* nuevoArray = new T[nuevaCapacidad];
         for (int i = 0; i < cantidad; ++i)
-            nuevoArray[i] = canciones[i];
-        delete[] canciones;
-        canciones = nuevoArray;
+            nuevoArray[i] = datos[i];
+        delete[] datos;
+        datos = nuevoArray;
         capacidad = nuevaCapacidad;
     }
 
 public:
-    DinArray(int cap = 10) : capacidad(cap), cantidad(0) {
-        canciones = new Cancion[capacidad];
+    Dynarray(int cap = 10) : capacidad(cap), cantidad(0) {
+        datos = new T[capacidad];
     }
 
-    ~DinArray() {
-        delete[] canciones;
+    ~Dynarray() {
+        delete[] datos;
     }
 
-    void agregar(const Cancion &c) {
+    void push_back(const T& elemento) {
         if (cantidad == capacidad)
             redimensionar();
-        canciones[cantidad++] = c;
+        datos[cantidad++] = elemento;
+    }
+
+    int size() const {
+        return cantidad;
+    }
+
+    T& operator[](int idx) {
+        if (idx < 0 || idx >= cantidad)
+            throw std::out_of_range("Índice fuera de rango");
+        return datos[idx];
+    }
+
+    const T& operator[](int idx) const {
+        if (idx < 0 || idx >= cantidad)
+            throw std::out_of_range("Índice fuera de rango");
+        return datos[idx];
     }
 };
 

@@ -7,6 +7,7 @@ add_library(music
 target_include_directories(music
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/libs/containers/include
 )
 
 target_link_libraries(music
