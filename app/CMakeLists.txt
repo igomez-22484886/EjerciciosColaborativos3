@@ -14,9 +14,6 @@ target_link_libraries(app
 # Incluir headers de módulos
 target_include_directories(app
         PRIVATE
-        ${PROJECT_SOURCE_DIR}/music/include
-        ${PROJECT_SOURCE_DIR}/video/include
-        # ${PROJECT_SOURCE_DIR}/common/include
+        ${PROJECT_SOURCE_DIR}/libs/music/include
+        ${PROJECT_SOURCE_DIR}/libs/video/include
 )
-
-message(STATUS "Ejecutable principal 'app' configurado correctamente.")
