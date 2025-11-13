@@ -11,6 +11,7 @@
 // Clase plantilla Dynarray
 
 template<typename T>
+
 class Dynarray {
 private:
     T* datos;
