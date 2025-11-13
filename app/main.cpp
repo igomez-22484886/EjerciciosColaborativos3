@@ -1,27 +1,27 @@
 #include <iostream>
-// #include "../include/VideoRepository.h"
 #include <string>
-#include "../music/include/MusicRepository.h"
+#include "MusicRepository.h"
+
 int main() {
     MusicRepository repo;
     repo.populateLibrary();
 
-    int option;
+    int option{};
     std::string query;
 
     do {
-        std::cout << "\nSistema de Búsqueda de Música\n";
-        std::cout << "1. Buscar por título de canción\n";
-        std::cout << "2. Buscar por álbum\n";
-        std::cout << "3. Buscar por grupo\n";
-        std::cout << "4. Buscar por género\n";
-        std::cout << "0. Salir\n";
-        std::cout << "Elige una opción: ";
+        std::cout << "\nMusic Search System\n";
+        std::cout << "1. Search by song title\n";
+        std::cout << "2. Search by album\n";
+        std::cout << "3. Search by group\n";
+        std::cout << "4. Search by genre\n";
+        std::cout << "0. Exit\n";
+        std::cout << "Choose an option: ";
         std::cin >> option;
         std::cin.ignore();
 
         if (option != 0) {
-            std::cout << "Introduce el término de búsqueda: ";
+            std::cout << "Enter your search term: ";
             std::getline(std::cin, query);
         }
 
@@ -39,10 +39,10 @@ int main() {
                 repo.searchByGenre(query);
                 break;
             case 0:
-                std::cout << "Saliendo del programa...\n";
+                std::cout << "Exiting program...\n";
                 break;
             default:
-                std::cout << "Opción inválida.\n";
+                std::cout << "Invalid option.\n";
         }
     } while (option != 0);
 

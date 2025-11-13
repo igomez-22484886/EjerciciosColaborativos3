@@ -1,72 +1,77 @@
-//
-// Created by Israel on 04/11/2025.
-//
-// music/src/MusicRepository.cpp
-#include "MusicRepository.h"
+#include "../include/MusicRepository.h"
 #include <iostream>
 
+// Implementación del repositorio de música.
 void MusicRepository::searchBySongTitle(const std::string& query) const {
     bool found = false;
-    for (size_t i = 0; i < albums.size(); ++i) {
+
+    for (std::size_t i = 0; i < albums.getSize(); ++i) {
         const Album& album = albums[i];
         const Dynarray<Song>& songs = album.getSongs();
-        for (size_t j = 0; j < songs.size(); ++j) {
+
+        for (std::size_t j = 0; j < songs.getSize(); ++j) {
             if (songs[j].getTitle().find(query) != std::string::npos) {
-                std::cout << "Canción: " << songs[j].getTitle() << std::endl;
-                std::cout << "Álbum: " << album.getTitle() << std::endl;
-                std::cout << "Grupo: " << album.getGroup() << std::endl;
-                std::cout << "Género: " << album.getGenre() << std::endl;
+                std::cout << "Song found: " << songs[j].getTitle() << std::endl;
+                std::cout << "Album: "     << album.getTitle() << std::endl;
+                std::cout << "Group: "     << album.getGroup() << std::endl;
+                std::cout << "Genre: "     << album.getGenre() << std::endl;
                 std::cout << "------------------------" << std::endl;
                 found = true;
             }
         }
     }
+
     if (!found) {
-        std::cout << "No se ha podido encontrar la canción con el título proporcionado." << std::endl;
+        std::cout << "No song found with the given title." << std::endl;
     }
 }
 
 void MusicRepository::searchByAlbum(const std::string& query) const {
     bool found = false;
-    for (size_t i = 0; i < albums.size(); ++i) {
+
+    for (std::size_t i = 0; i < albums.getSize(); ++i) {
         if (albums[i].getTitle().find(query) != std::string::npos) {
             albums[i].print();
             found = true;
         }
     }
+
     if (!found) {
-        std::cout << "No se ha podido encontrar el álbum." << std::endl;
+        std::cout << "No album found with the given title." << std::endl;
     }
 }
 
 void MusicRepository::searchByGroup(const std::string& query) const {
     bool found = false;
-    for (size_t i = 0; i < albums.size(); ++i) {
+
+    for (std::size_t i = 0; i < albums.getSize(); ++i) {
         if (albums[i].getGroup().find(query) != std::string::npos) {
             albums[i].print();
             found = true;
         }
     }
+
     if (!found) {
-        std::cout << "No se ha podido encontrar el grupo." << std::endl;
+        std::cout << "No group found with the given name." << std::endl;
     }
 }
 
 void MusicRepository::searchByGenre(const std::string& query) const {
     bool found = false;
-    for (size_t i = 0; i < albums.size(); ++i) {
+
+    for (std::size_t i = 0; i < albums.getSize(); ++i) {
         if (albums[i].getGenre().find(query) != std::string::npos) {
             albums[i].print();
             found = true;
         }
     }
+
     if (!found) {
-        std::cout << "No se ha podido encontrar el género." << std::endl;
+        std::cout << "No genre found with the given name." << std::endl;
     }
 }
 
 void MusicRepository::populateLibrary() {
-    // Ejemplos
     Album a1("A Night at the Opera", "Queen", "Rock");
     a1.addSong(Song("Bohemian Rhapsody"));
     addAlbum(a1);
