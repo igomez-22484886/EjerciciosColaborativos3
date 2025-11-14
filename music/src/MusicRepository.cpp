@@ -72,6 +72,7 @@ void MusicRepository::searchByGenre(const std::string& query) const {
 }
 
 void MusicRepository::populateLibrary() {
+
     Album a1("A Night at the Opera", "Queen", "Rock");
     a1.addSong(Song("Bohemian Rhapsody"));
     addAlbum(a1);
@@ -108,4 +109,59 @@ void MusicRepository::populateLibrary() {
     Album a9("News of the World", "Queen", "Rock");
     a9.addSong(Song("We Will Rock You"));
     addAlbum(a9);
+    Album a10("Back in Black", "AC/DC", "Rock");
+    a10.addSong(Song("Back in Black"));
+    a10.addSong(Song("Hells Bells"));
+    addAlbum(a10);
+
+    Album a11("Random Access Memories", "Daft Punk", "Electro");
+    a11.addSong(Song("Get Lucky"));
+    a11.addSong(Song("Instant Crush"));
+    addAlbum(a11);
+
+    Album a12("Born to Die", "Lana Del Rey", "Indie Pop");
+    a12.addSong(Song("Born to Die"));
+    a12.addSong(Song("Summertime Sadness"));
+    addAlbum(a12);
+
+    Album a13("The Eminem Show", "Eminem", "Rap");
+    a13.addSong(Song("Without Me"));
+    a13.addSong(Song("Sing for the Moment"));
+    addAlbum(a13);
+
+    Album a14("Californication", "Red Hot Chili Peppers", "Alternative Rock");
+    a14.addSong(Song("Californication"));
+    a14.addSong(Song("Otherside"));
+    addAlbum(a14);
+
+    Album a15("1989", "Taylor Swift", "Pop");
+    a15.addSong(Song("Blank Space"));
+    a15.addSong(Song("Shake It Off"));
+    addAlbum(a15);
+
+    Album a16("The Dark Side of the Moon", "Pink Floyd", "Progressive Rock");
+    a16.addSong(Song("Time"));
+    a16.addSong(Song("Money"));
+    addAlbum(a16);
+
+    Album a17("Abbey Road", "The Beatles", "Rock");
+    a17.addSong(Song("Come Together"));
+    a17.addSong(Song("Here Comes the Sun"));
+    addAlbum(a17);
+
+    Album a18("Hybrid Theory", "Linkin Park", "Nu Metal");
+    a18.addSong(Song("In the End"));
+    a18.addSong(Song("Crawling"));
+    addAlbum(a18);
+
+    Album a19("Future Nostalgia", "Dua Lipa", "Pop");
+    a19.addSong(Song("Don't Start Now"));
+    a19.addSong(Song("Levitating"));
+    addAlbum(a19);
+
+    Album a20("The College Dropout", "Kanye West", "Hip Hop");
+    a20.addSong(Song("Jesus Walks"));
+    a20.addSong(Song("All Falls Down"));
+    addAlbum(a20);
+
 }

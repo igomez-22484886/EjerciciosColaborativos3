@@ -10,12 +10,12 @@ void showVideoMenu() {
     std::cout << "3. Search by genre\n";
     std::cout << "4. Search by quality\n";
     std::cout << "5. Rent a title\n";
-    std::cout << "0. Back to main menu\n";bomba
+    std::cout << "0. Back to main menu\n";
 }
 
 void showMusicMenu() {
     std::cout << "==== Music Menu ====\n";
-    std::cout << "1. List all songs\n";
+    std::cout << "1. Search by song title\n";
     std::cout << "2. Search by album\n";
     std::cout << "3. Search by group\n";
     std::cout << "4. Search by genre\n";
@@ -23,16 +23,14 @@ void showMusicMenu() {
 }
 
 int main() {
-    // Creamos los objetos almacenandolos en la Free Store
-    VideoRepository *videoRepo = new VideoRepository();
-    MusicRepository *musicRepo = new MusicRepository();
+    VideoRepository* videoRepo = new VideoRepository();
+    MusicRepository* musicRepo = new MusicRepository();
 
-    // Cargar datos de ejemplo
     videoRepo->seed();
     musicRepo->populateLibrary();
 
     int mainOption = -1;
-    // Generamos un menú
+
     while (mainOption != 0) {
         std::cout << "\n==== Main Menu ====\n";
         std::cout << "1. Video Repository\n";
@@ -43,48 +41,65 @@ int main() {
 
         if (mainOption == 1) {
             int videoOption = -1;
+
             while (videoOption != 0) {
                 showVideoMenu();
                 std::cout << "Select option: ";
                 std::cin >> videoOption;
 
                 if (videoOption == 1) {
-                    auto allTitles = videoRepo->findByTitle(""); // "" devuelve todos
+                    std::cout << "\nListing all titles:\n";
+                    auto allTitles = videoRepo->findByTitle("");
+
                     for (size_t i = 0; i < allTitles.size(); i++) {
                         std::cout << allTitles[i].getName() << " | "
-                                << allTitles[i].getGenre() << "\n";
+                                  << allTitles[i].getGenre() << "\n";
                     }
-                } else if (videoOption == 2) {
+                }
+                else if (videoOption == 2) {
                     std::string query;
                     std::cout << "Enter title: ";
+                    std::cin.ignore(); // limpiar salto
                     std::getline(std::cin, query);
+
                     auto results = videoRepo->findByTitle(query);
+
                     for (size_t i = 0; i < results.size(); i++) {
                         std::cout << results[i].getName() << " | "
-                                << results[i].getGenre() << "\n";
+                                  << results[i].getGenre() << "\n";
                     }
-                } else if (videoOption == 3) {
+                }
+                else if (videoOption == 3) {
                     std::string genre;
                     std::cout << "Enter genre: ";
+                    std::cin.ignore();
                     std::getline(std::cin, genre);
+
                     auto results = videoRepo->findByGenre(genre);
+
                     for (size_t i = 0; i < results.size(); i++) {
                         std::cout << results[i].getName() << " | "
-                                << results[i].getGenre() << "\n";
+                                  << results[i].getGenre() << "\n";
                     }
-                } else if (videoOption == 4) {
+                }
+                else if (videoOption == 4) {
                     int q;
-                    std::cout << "Enter quality (0 = FHD, 1 = UHD): ";
+                    std::cout << "Enter quality (0 = HD, 1 = FullHD, 2 = UHD): ";
                     std::cin >> q;
+
                     auto results = videoRepo->findByQuality(static_cast<Quality>(q));
+
                     for (size_t i = 0; i < results.size(); i++) {
                         std::cout << results[i].getName() << " | "
-                                << results[i].getGenre() << "\n";
+                                  << results[i].getGenre() << "\n";
                     }
-                } else if (videoOption == 5) {
+                }
+                else if (videoOption == 5) {
                     std::string title;
                     std::cout << "Enter title to rent: ";
+                    std::cin.ignore();
                     std::getline(std::cin, title);
+
                     if (videoRepo->rentByTitle(title)) {
                         std::cout << "Title rented successfully.\n";
                     } else {
@@ -92,33 +107,29 @@ int main() {
                     }
                 }
             }
-        } else if (mainOption == 2) {
+        }
+        else if (mainOption == 2) {
             int musicOption = -1;
+
             while (musicOption != 0) {
                 showMusicMenu();
                 std::cout << "Select option: ";
                 std::cin >> musicOption;
 
-                if (musicOption == 1) {
+                if (musicOption >= 1 && musicOption <= 4) {
                     std::string query;
-                    std::cout << "Enter song title: ";
+                    std::cout << "Enter search text: ";
+                    std::cin.ignore();
                     std::getline(std::cin, query);
-                    musicRepo->searchBySongTitle(query);
-                } else if (musicOption == 2) {
-                    std::string query;
-                    std::cout << "Enter album title: ";
-                    std::getline(std::cin, query);
-                    musicRepo->searchByAlbum(query);
-                } else if (musicOption == 3) {
-                    std::string query;
-                    std::cout << "Enter group name: ";
-                    std::getline(std::cin, query);
-                    musicRepo->searchByGroup(query);
-                } else if (musicOption == 4) {
-                    std::string query;
-                    std::cout << "Enter genre: ";
-                    std::getline(std::cin, query);
-                    musicRepo->searchByGenre(query);
+
+                    if (musicOption == 1)
+                        musicRepo->searchBySongTitle(query);
+                    else if (musicOption == 2)
+                        musicRepo->searchByAlbum(query);
+                    else if (musicOption == 3)
+                        musicRepo->searchByGroup(query);
+                    else if (musicOption == 4)
+                        musicRepo->searchByGenre(query);
                 }
             }
         }
