@@ -10,7 +10,7 @@ void showVideoMenu() {
     std::cout << "3. Search by genre\n";
     std::cout << "4. Search by quality\n";
     std::cout << "5. Rent a title\n";
-    std::cout << "0. Back to main menu\n";
+    std::cout << "0. Back to main menu\n";bomba
 }
 
 void showMusicMenu() {
