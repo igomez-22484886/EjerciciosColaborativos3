@@ -14,10 +14,17 @@ void VideoRepository::addMany(std::initializer_list<Title> list) {
 
 Vector<Title> VideoRepository::findByTitle(const std::string &name) const {
     Vector<Title> result;
-    for (auto const &x: items_)
-        if (x.getName() == name) result.pushBack(x);
+
+    for (auto const& x : items_) {
+        // Si el nombre está vacío, devolvemos todos los títulos
+        if (name.empty() || x.getName() == name) {
+            result.pushBack(x);
+        }
+    }
+
     return result;
 }
+
 
 Vector<Title> VideoRepository::findByGenre(const std::string &genre) const {
     Vector<Title> result;
@@ -69,13 +76,5 @@ void VideoRepository::seed() {
         Title{"House of the Dragon S1", "Fantasy", Quality::UHD, Tariff::Premium, 3.99, false},
         Title{"Stranger Things S1", "Sci-Fi", Quality::UHD, Tariff::Standard, 0.0, false},
         Title{"Stranger Things S2", "Sci-Fi", Quality::UHD, Tariff::Standard, 0.0, false},
-        Title{"La banda del Peugeot", "Corruption", Quality::UHD, Tariff::Standard, 0.0, false},
-        Title{"Mi primer Segarro", "Crime", Quality::UHD, Tariff::Standard, 0.0, false},
-        Title{"Son las 5 y no he comido :(", "Suspense", Quality::UHD, Tariff::Standard, 0.0, false},
-
-
-
-
-
-});
+    });
 }
