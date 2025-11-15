@@ -41,7 +41,13 @@ int main() {
         std::cout << "2. Music repository\n";
         std::cout << "0. Exit\n";
         std::cout << "Select option: ";
-        std::cin >> mainOption;
+
+        if (!(std::cin >> mainOption)) {
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            std::cout << "Invalid input. Try again.\n";
+            continue;
+        }
 
         if (mainOption == 1) {
             int videoOption = -1;
@@ -49,17 +55,30 @@ int main() {
             while (videoOption != 0) {
                 showVideoMenu();
                 std::cout << "Select option: ";
-                std::cin >> videoOption;
+
+                if (!(std::cin >> videoOption)) {
+                    std::cin.clear();
+                    std::cin.ignore(10000, '\n');
+                    std::cout << "Invalid input. Try again.\n";
+                    continue;
+                }
 
                 if (videoOption == 1) {
                     // List all titles
                     std::cout << "\nListing all titles:\n";
                     auto allTitles = videoRepo.findByTitle("");
-                    for (std::size_t i = 0; i < allTitles.size(); ++i) {
-                        std::cout << allTitles[i].getName()
-                                  << " | " << allTitles[i].getGenre() << "\n";
+
+                    if (allTitles.empty()) {
+                        std::cout << "No videos in repository.\n";
+                    } else {
+                        for (const auto& video : allTitles) {
+                            std::cout << video.getName()
+                                      << " | " << video.getGenre() << "\n";
+                        }
                     }
-                } else if (videoOption == 2) {
+                }
+
+                else if (videoOption == 2) {
                     // Search by title
                     std::string query;
                     std::cout << "Enter title: ";
@@ -67,11 +86,19 @@ int main() {
                     std::getline(std::cin, query);
 
                     auto results = videoRepo.findByTitle(query);
-                    for (std::size_t i = 0; i < results.size(); ++i) {
-                        std::cout << results[i].getName()
-                                  << " | " << results[i].getGenre() << "\n";
+
+                    if (results.empty()) {
+                        std::cout << "No titles found matching: " << query << "\n";
+                    } else {
+                        std::cout << "Results found:\n";
+                        for (const auto& video : results) {
+                            std::cout << video.getName()
+                                      << " | " << video.getGenre() << "\n";
+                        }
                     }
-                } else if (videoOption == 3) {
+                }
+
+                else if (videoOption == 3) {
                     // Search by genre
                     std::string genre;
                     std::cout << "Enter genre: ";
@@ -79,22 +106,42 @@ int main() {
                     std::getline(std::cin, genre);
 
                     auto results = videoRepo.findByGenre(genre);
-                    for (std::size_t i = 0; i < results.size(); ++i) {
-                        std::cout << results[i].getName()
-                                  << " | " << results[i].getGenre() << "\n";
+
+                    if (results.empty()) {
+                        std::cout << "No videos found for genre: " << genre << "\n";
+                    } else {
+                        for (const auto& video : results) {
+                            std::cout << video.getName()
+                                      << " | " << video.getGenre() << "\n";
+                        }
                     }
-                } else if (videoOption == 4) {
+                }
+
+                else if (videoOption == 4) {
                     // Search by quality
                     int q;
                     std::cout << "Enter quality (0 = FullHD, 1 = UHD): ";
-                    std::cin >> q;
+
+                    if (!(std::cin >> q)) {
+                        std::cin.clear();
+                        std::cin.ignore(10000, '\n');
+                        std::cout << "Invalid input.\n";
+                        continue;
+                    }
 
                     auto results = videoRepo.findByQuality(static_cast<Quality>(q));
-                    for (std::size_t i = 0; i < results.size(); ++i) {
-                        std::cout << results[i].getName()
-                                  << " | " << results[i].getGenre() << "\n";
+
+                    if (results.empty()) {
+                        std::cout << "No videos found with that quality.\n";
+                    } else {
+                        for (const auto& video : results) {
+                            std::cout << video.getName()
+                                      << " | " << video.getGenre() << "\n";
+                        }
                     }
-                } else if (videoOption == 5) {
+                }
+
+                else if (videoOption == 5) {
                     // Rent a title
                     std::string title;
                     std::cout << "Enter title to rent: ";
@@ -108,13 +155,21 @@ int main() {
                     }
                 }
             }
-        } else if (mainOption == 2) {
+        }
+
+        else if (mainOption == 2) {
             int musicOption = -1;
 
             while (musicOption != 0) {
                 showMusicMenu();
                 std::cout << "Select option: ";
-                std::cin >> musicOption;
+
+                if (!(std::cin >> musicOption)) {
+                    std::cin.clear();
+                    std::cin.ignore(10000, '\n');
+                    std::cout << "Invalid input. Try again.\n";
+                    continue;
+                }
 
                 if (musicOption >= 1 && musicOption <= 4) {
                     std::string query;

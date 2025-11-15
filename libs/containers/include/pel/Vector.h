@@ -72,6 +72,11 @@ public:
 
     const T* begin() const { return v_; }
     const T* end()   const { return space_; }
+    // Si son iguales, indica que no hay contendores almacenados
+    bool empty() const {
+        return space_ == last_;
+
+    };
 };
 
 #endif //EJERCICIOSCOLABORATIVOS3_VECTOR_H
