@@ -1,21 +1,23 @@
-# Crear un ejecutable separado para pruebas o demostraciones
+# tests/CMakeLists.txt
+
+# Executable with both test files
 add_executable(tests
-        ${CMAKE_CURRENT_SOURCE_DIR}/test_music.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test_video.cpp
+        test_music.cpp
+        test_video.cpp
 )
 
-# Enlazar con las librerías de los módulos
+# Link with project libraries
 target_link_libraries(tests
         PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/music
-        ${CMAKE_CURRENT_SOURCE_DIR}/video
+        music          # target from libs/music/CMakeLists.txt
+        video          # target from libs/video/CMakeLists.txt
+        pel_containers # target from libs/containers/CMakeLists.txt
 )
 
-# Incluir los headers
+# Include headers from modules
 target_include_directories(tests
         PRIVATE
         ${PROJECT_SOURCE_DIR}/music/include
         ${PROJECT_SOURCE_DIR}/video/include
+        ${PROJECT_SOURCE_DIR}/libs/containers/include
 )
-
-message(STATUS "Ejecutable de pruebas configurado correctamente.")
