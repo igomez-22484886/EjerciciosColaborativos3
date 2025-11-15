@@ -5,6 +5,25 @@
 void MusicRepository::searchBySongTitle(const std::string& query) const {
     bool found = false;
 
+    // Si query está vacío → enseñamos todas las canciones
+    if (query.empty()) {
+        std::cout << "Showing all songs:\n";
+        for (std::size_t i = 0; i < albums.getSize(); ++i) {
+            const Album& album = albums[i];
+            const Dynarray<Song>& songs = album.getSongs();
+
+            for (std::size_t j = 0; j < songs.getSize(); ++j) {
+                std::cout << "Song: "  << songs[j].getTitle()  << std::endl;
+                std::cout << "Album: " << album.getTitle()     << std::endl;
+                std::cout << "Group: " << album.getGroup()     << std::endl;
+                std::cout << "Genre: " << album.getGenre()     << std::endl;
+                std::cout << "------------------------"        << std::endl;
+            }
+        }
+        return;
+    }
+
+    // Búsqueda normal si query contiene texto
     for (std::size_t i = 0; i < albums.getSize(); ++i) {
         const Album& album = albums[i];
         const Dynarray<Song>& songs = album.getSongs();

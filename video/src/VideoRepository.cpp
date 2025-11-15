@@ -9,7 +9,9 @@ void VideoRepository::add(const Title &t) {
 }
 
 void VideoRepository::addMany(std::initializer_list<Title> list) {
-    for (auto const &x: list) items_.pushBack(x);
+    for (auto const &x: list) {
+        items_.pushBack(x);
+    }
 }
 
 Vector<Title> VideoRepository::findByTitle(const std::string &name) const {
@@ -28,15 +30,21 @@ Vector<Title> VideoRepository::findByTitle(const std::string &name) const {
 
 Vector<Title> VideoRepository::findByGenre(const std::string &genre) const {
     Vector<Title> result;
-    for (auto const &x: items_)
+
+    for (auto const &x: items_) {
         if (x.getGenre() == genre) result.pushBack(x);
+    }
+
     return result;
 }
 
 Vector<Title> VideoRepository::findByQuality(Quality q) const {
     Vector<Title> result;
-    for (auto const &x: items_)
+
+    for (auto const &x: items_) {
         if (x.getQuality() == q) result.pushBack(x);
+    }
+
     return result;
 }
 

@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
+#include <limits>           // Para numeric_limits
 #include "VideoRepository.h"
 #include "MusicRepository.h"
 
 // Muestra el menú de vídeo
 void showVideoMenu() {
-    std::cout << "==== Video Menu ====\n";
+    std::cout << "\n==== Video Menu ====\n";
     std::cout << "1. List all titles\n";
     std::cout << "2. Search by title\n";
     std::cout << "3. Search by genre\n";
@@ -17,11 +18,39 @@ void showVideoMenu() {
 // Muestra el menú de música
 void showMusicMenu() {
     std::cout << "==== Music Menu ====\n";
-    std::cout << "1. Search by song title\n";
-    std::cout << "2. Search by album\n";
-    std::cout << "3. Search by group\n";
-    std::cout << "4. Search by genre\n";
+    std::cout << "1. List all songs\n";
+    std::cout << "2. Search by song title\n";
+    std::cout << "3. Search by album\n";
+    std::cout << "4. Search by group\n";
+    std::cout << "5. Search by genre\n";
     std::cout << "0. Back to main menu\n";
+}
+
+// Lee un int desde consola y validación
+int readInt(const std::string& stringValue) {
+    int value{};
+    while (true) {
+        std::cout << stringValue;
+        if (std::cin >> value) {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            return value;
+        }
+
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Try again.\n";
+    }
+}
+
+// Lee una opción de menú dentro de un rango
+int readMenuOption(const std::string& value, int min, int max) {
+    while (true) {
+        int option = readInt(value);
+        if (option >= min && option <= max) {
+            return option;
+        }
+        std::cout << "Invalid option. Try again.\n";
+    }
 }
 
 int main() {
@@ -40,28 +69,15 @@ int main() {
         std::cout << "1. Video repository\n";
         std::cout << "2. Music repository\n";
         std::cout << "0. Exit\n";
-        std::cout << "Select option: ";
 
-        if (!(std::cin >> mainOption)) {
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            std::cout << "Invalid input. Try again.\n";
-            continue;
-        }
+        mainOption = readMenuOption("Select option: ", 0, 2);
 
         if (mainOption == 1) {
             int videoOption = -1;
 
             while (videoOption != 0) {
                 showVideoMenu();
-                std::cout << "Select option: ";
-
-                if (!(std::cin >> videoOption)) {
-                    std::cin.clear();
-                    std::cin.ignore(10000, '\n');
-                    std::cout << "Invalid input. Try again.\n";
-                    continue;
-                }
+                videoOption = readMenuOption("Select option: ", 0, 5);
 
                 if (videoOption == 1) {
                     // List all titles
@@ -76,13 +92,11 @@ int main() {
                                       << " | " << video.getGenre() << "\n";
                         }
                     }
-                }
 
-                else if (videoOption == 2) {
+                } else if (videoOption == 2) {
                     // Search by title
                     std::string query;
                     std::cout << "Enter title: ";
-                    std::cin.ignore();
                     std::getline(std::cin, query);
 
                     auto results = videoRepo.findByTitle(query);
@@ -96,13 +110,11 @@ int main() {
                                       << " | " << video.getGenre() << "\n";
                         }
                     }
-                }
 
-                else if (videoOption == 3) {
+                } else if (videoOption == 3) {
                     // Search by genre
                     std::string genre;
                     std::cout << "Enter genre: ";
-                    std::cin.ignore();
                     std::getline(std::cin, genre);
 
                     auto results = videoRepo.findByGenre(genre);
@@ -115,19 +127,11 @@ int main() {
                                       << " | " << video.getGenre() << "\n";
                         }
                     }
-                }
 
-                else if (videoOption == 4) {
+                } else if (videoOption == 4) {
                     // Search by quality
-                    int q;
                     std::cout << "Enter quality (0 = FullHD, 1 = UHD): ";
-
-                    if (!(std::cin >> q)) {
-                        std::cin.clear();
-                        std::cin.ignore(10000, '\n');
-                        std::cout << "Invalid input.\n";
-                        continue;
-                    }
+                    int q = readInt("");
 
                     auto results = videoRepo.findByQuality(static_cast<Quality>(q));
 
@@ -139,13 +143,11 @@ int main() {
                                       << " | " << video.getGenre() << "\n";
                         }
                     }
-                }
 
-                else if (videoOption == 5) {
+                } else if (videoOption == 5) {
                     // Rent a title
                     std::string title;
                     std::cout << "Enter title to rent: ";
-                    std::cin.ignore();
                     std::getline(std::cin, title);
 
                     if (videoRepo.rentByTitle(title)) {
@@ -155,36 +157,44 @@ int main() {
                     }
                 }
             }
-        }
-
-        else if (mainOption == 2) {
+        } else if (mainOption == 2) {
             int musicOption = -1;
 
             while (musicOption != 0) {
                 showMusicMenu();
-                std::cout << "Select option: ";
+                musicOption = readMenuOption("Select option: ", 0, 5);
 
-                if (!(std::cin >> musicOption)) {
-                    std::cin.clear();
-                    std::cin.ignore(10000, '\n');
-                    std::cout << "Invalid input. Try again.\n";
-                    continue;
-                }
-
-                if (musicOption >= 1 && musicOption <= 4) {
+                if (musicOption == 1) {
+                    std::cout << "\nListing all songs:\n";
+                    musicRepo.searchBySongTitle("");
+                } else if (musicOption >= 2 && musicOption <= 5) {
                     std::string query;
-                    std::cout << "Enter search text: ";
-                    std::cin.ignore();
+
+                    if (musicOption == 2) {
+                        std::cout << "Enter song title: ";
+                    } else if (musicOption == 3) {
+                        std::cout << "Enter album name: ";
+                    } else if (musicOption == 4) {
+                        std::cout << "Enter group name: ";
+                    } else if (musicOption == 5) {
+                        std::cout << "Enter genre: ";
+                    }
+
                     std::getline(std::cin, query);
 
-                    if (musicOption == 1) {
-                        musicRepo.searchBySongTitle(query);
-                    } else if (musicOption == 2) {
-                        musicRepo.searchByAlbum(query);
-                    } else if (musicOption == 3) {
-                        musicRepo.searchByGroup(query);
-                    } else if (musicOption == 4) {
-                        musicRepo.searchByGenre(query);
+                    switch (musicOption) {
+                        case 2:
+                            musicRepo.searchBySongTitle(query);
+                            break;
+                        case 3:
+                            musicRepo.searchByAlbum(query);
+                            break;
+                        case 4:
+                            musicRepo.searchByGroup(query);
+                            break;
+                        case 5:
+                            musicRepo.searchByGenre(query);
+                            break;
                     }
                 }
             }
