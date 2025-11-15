@@ -9,4 +9,4 @@ add_subdirectory(libs/containers)
 add_subdirectory(music)
 add_subdirectory(video)
 add_subdirectory(app)
-add_subdirectory(tests) # opcional
+add_subdirectory(tests)
