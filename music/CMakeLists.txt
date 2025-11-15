@@ -14,6 +14,4 @@ target_link_libraries(music
         PUBLIC pel_containers
 )
 
-# target_include_directories(music PUBLIC ${PROJECT_SOURCE_DIR}/common/include)
-
 message(STATUS "Módulo 'music' añadido correctamente.")

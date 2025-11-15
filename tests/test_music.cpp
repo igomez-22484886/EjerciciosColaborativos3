@@ -6,11 +6,6 @@
 #include "MusicRepository.h"
 #include "../libs/containers/include/pel/Dynarray.h"
 
-// En estos tests probamos las clases del módulo de música:
-// - Song: getters y setters.
-// - Album: añadir canciones y acceder a ellas.
-// - MusicRepository: al menos un caso de búsqueda comprobando la salida.
-
 int main() {
     // Test 1: clase Song
     {

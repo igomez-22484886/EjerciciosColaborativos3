@@ -21,13 +21,10 @@ private:
     bool available;
 
 public:
-    // Constructor por parámetros
     Title(const std::string &n, const std::string &g, Quality q, Tariff t, double p, bool a);
 
-    // Constructor por defecto
     Title();
 
-    // Getters
     std::string getName() const;
 
     std::string getGenre() const;
@@ -40,7 +37,6 @@ public:
 
     bool isAvailable() const;
 
-    // Setters
     void setName(const std::string &n);
 
     void setGenre(const std::string &g);

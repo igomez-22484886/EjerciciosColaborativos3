@@ -1,7 +1,6 @@
 #include "../include/MusicRepository.h"
 #include <iostream>
 
-// Implementación del repositorio de música.
 void MusicRepository::searchBySongTitle(const std::string& query) const {
     bool found = false;
 

@@ -5,11 +5,8 @@
 #ifndef EJERCICIOSCOLABORATIVOS3_VIDEOREPOSITORY_H
 #define EJERCICIOSCOLABORATIVOS3_VIDEOREPOSITORY_H
 
-#pragma once
 #include "pel/Vector.h"
 #include "Title.h"
-#include <string>
-#include <initializer_list>
 
 class VideoRepository {
 private:

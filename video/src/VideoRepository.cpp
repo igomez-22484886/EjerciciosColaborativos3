@@ -1,7 +1,3 @@
-//
-// Created by Israel on 04/11/2025.
-//
-
 #include "VideoRepository.h"
 
 void VideoRepository::add(const Title &t) {
@@ -18,7 +14,6 @@ Vector<Title> VideoRepository::findByTitle(const std::string &name) const {
     Vector<Title> result;
 
     for (auto const& x : items_) {
-        // Si el nombre está vacío, devolvemos todos los títulos
         if (name.empty() || x.getName() == name) {
             result.pushBack(x);
         }
@@ -55,10 +50,10 @@ bool VideoRepository::rentByTitle(const std::string &name) {
                 x.setAvailable(true);
                 return true;
             }
-            return false; // already available
+            return false;
         }
     }
-    return false; // not found
+    return false;
 }
 
 void VideoRepository::loadData() {

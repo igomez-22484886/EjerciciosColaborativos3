@@ -1,9 +1,7 @@
-# Crear el ejecutable principal
 add_executable(app
         main.cpp
 )
 
-# Enlazar librerías
 target_link_libraries(app
         PRIVATE
         music
@@ -11,7 +9,6 @@ target_link_libraries(app
         pel_containers
 )
 
-# Incluir headers de módulos
 target_include_directories(app
         PRIVATE
         ${PROJECT_SOURCE_DIR}/libs/music/include

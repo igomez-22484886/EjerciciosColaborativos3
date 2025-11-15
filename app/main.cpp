@@ -80,7 +80,6 @@ int main() {
                 videoOption = readMenuOption("Select option: ", 0, 5);
 
                 if (videoOption == 1) {
-                    // List all titles
                     std::cout << "\nListing all titles:\n";
                     auto allTitles = videoRepo.findByTitle("");
 
@@ -94,7 +93,6 @@ int main() {
                     }
 
                 } else if (videoOption == 2) {
-                    // Search by title
                     std::string query;
                     std::cout << "Enter title: ";
                     std::getline(std::cin, query);
@@ -112,7 +110,6 @@ int main() {
                     }
 
                 } else if (videoOption == 3) {
-                    // Search by genre
                     std::string genre;
                     std::cout << "Enter genre: ";
                     std::getline(std::cin, genre);
@@ -129,7 +126,6 @@ int main() {
                     }
 
                 } else if (videoOption == 4) {
-                    // Search by quality
                     std::cout << "Enter quality (0 = FullHD, 1 = UHD): ";
                     int q = readInt("");
 
@@ -145,7 +141,6 @@ int main() {
                     }
 
                 } else if (videoOption == 5) {
-                    // Rent a title
                     std::string title;
                     std::cout << "Enter title to rent: ";
                     std::getline(std::cin, title);

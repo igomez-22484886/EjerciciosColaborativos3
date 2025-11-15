@@ -11,9 +11,9 @@
 template<typename T>
 class Vector {
 private:
-    T* v_;       // beginning
-    T* space_;   // next free slot
-    T* last_;    // end of allocated memory
+    T* v_;
+    T* space_;
+    T* last_;
 
 public:
     Vector() : v_(nullptr), space_(nullptr), last_(nullptr) {}
@@ -23,7 +23,6 @@ public:
     }
 
     void pushBack(const T& data) {
-        // empty vector
         if (v_ == nullptr) {
             v_ = new T[2];
             v_[0] = data;
@@ -32,7 +31,6 @@ public:
             return;
         }
 
-        // full vector
         if (space_ == last_) {
             size_t oldSize = size();
             size_t newCap = capacity() * 2;
