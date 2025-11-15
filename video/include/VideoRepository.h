@@ -25,7 +25,7 @@ public:
 
     bool rentByTitle(const std::string& name);
 
-    void seed();
+    void loadData();
 };
 
 

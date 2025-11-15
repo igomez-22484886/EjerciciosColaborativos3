@@ -17,7 +17,7 @@ void showVideoMenu() {
 
 // Muestra el menú de música
 void showMusicMenu() {
-    std::cout << "==== Music Menu ====\n";
+    std::cout << "\n==== Music Menu ====\n";
     std::cout << "1. List all songs\n";
     std::cout << "2. Search by song title\n";
     std::cout << "3. Search by album\n";
@@ -59,8 +59,8 @@ int main() {
     MusicRepository musicRepo;
 
     // Cargar datos iniciales
-    videoRepo.seed();
-    musicRepo.populateLibrary();
+    videoRepo.loadData();
+    musicRepo.loadData();
 
     int mainOption = -1;
 
@@ -153,7 +153,7 @@ int main() {
                     if (videoRepo.rentByTitle(title)) {
                         std::cout << "Title rented successfully.\n";
                     } else {
-                        std::cout << "Cannot rent title (not available or not found).\n";
+                        std::cout << "Cannot rent title.\n";
                     }
                 }
             }

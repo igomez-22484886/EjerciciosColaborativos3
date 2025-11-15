@@ -8,7 +8,7 @@
 int main() {
     // Creamos el repositorio y cargamos los datos de ejemplo
     VideoRepository repo;
-    repo.seed();
+    repo.loadData();
 
     // Test 1: búsqueda por título existente
     {

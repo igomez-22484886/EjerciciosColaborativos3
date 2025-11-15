@@ -25,7 +25,7 @@ public:
     void searchByGenre(const std::string& query) const;
 
     // Rellena la biblioteca con algunos ejemplos
-    void populateLibrary();
+    void loadData();
 };
 
 

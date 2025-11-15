@@ -61,7 +61,7 @@ bool VideoRepository::rentByTitle(const std::string &name) {
     return false; // not found
 }
 
-void VideoRepository::seed() {
+void VideoRepository::loadData() {
     addMany({
         Title{"Dune: Part Two", "Sci-Fi", Quality::UHD, Tariff::Premium, 3.99, false},
         Title{"Oppenheimer", "Drama", Quality::FHD, Tariff::Standard, 0.0, false},

@@ -36,7 +36,7 @@ int main() {
     // Test 3: MusicRepository + populateLibrary
     {
         MusicRepository repo;
-        repo.populateLibrary();                       // Solo comprobamos que no crashea
+        repo.loadData();                       // Solo comprobamos que no crashea
 
         // Vamos a probar searchBySongTitle capturando la salida en memoria
         std::streambuf* oldBuf = std::cout.rdbuf();   // Guardamos el buffer original de cout
@@ -60,7 +60,7 @@ int main() {
     // Test 4: llamadas básicas a las otras búsquedas (no comprobamos salida, solo que no fallen)
     {
         MusicRepository repo;
-        repo.populateLibrary();
+        repo.loadData();
 
         repo.searchByAlbum("Thriller");
         repo.searchByGroup("Nirvana");

@@ -90,7 +90,7 @@ void MusicRepository::searchByGenre(const std::string& query) const {
     }
 }
 
-void MusicRepository::populateLibrary() {
+void MusicRepository::loadData() {
 
     Album a1("A Night at the Opera", "Queen", "Rock");
     a1.addSong(Song("Bohemian Rhapsody"));
